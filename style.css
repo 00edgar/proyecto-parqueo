@@ -1,0 +1,16 @@
+nav{
+    background-color: rgb(19, 54, 209);
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    gap :10px;
+    color: white;
+    display: flex;
+   }
+   img{
+    width: 10%;
+    height: 10%;
+    border-radius: 100%;
+    align-self: left;
+   }
