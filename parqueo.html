@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Parqueo - Maquetación</title>
+    <link rel="stylesheet" href="parqueo.css">
+</head>
+<body>
+
+    <!-- Encabezado Principal -->
+    <header>
+        <h1>Sistema de Gestión de Parqueo</h1>
+        <p>Control y monitoreo de espacios en tiempo real</p>
+    </header>
+
+    <main>
+        <!-- Sección de Estadísticas (Tarjetas superiores) -->
+        <section id="stats">
+            <article class="stat-card">
+                <p>Ocupación</p>
+                <strong>0/50</strong>
+            </article>
+            <article class="stat-card">
+                <p>Tasa de Ocupación</p>
+                <strong>0.0%</strong>
+            </article>
+            <article class="stat-card">
+                <p>Vehículos Hoy</p>
+                <strong>0</strong>
+            </article>
+            <article class="stat-card">
+                <p>Tiempo Promedio</p>
+                <strong>0h</strong>
+            </article>
+        </section>
+
+        <hr>
+
+        <!-- Contenedor Flexible para el Mapa y el Formulario -->
+        <div class="content-wrapper">
+            
+            <!-- Mapa del Parqueo -->
+            <section id="parking-map">
+                <h2>Mapa del Parqueo</h2>
+                <div class="grid-container">
+                    <!-- Ejemplo de un espacio (se repetiría para los 50) -->
+                    <div class="slot">1</div>
+                    <div class="slot">2</div>
+                    <div class="slot">3</div>
+                    <!-- ... -->
+                </div>
+            </section>
+
+            <!-- Formulario de Registro -->
+            <aside id="registration">
+                <section class="form-card">
+                    <h3>Registrar Entrada</h3>
+                    <form>
+                        <label for="placa">Placa del Vehículo</label>
+                        <input type="text" id="placa" placeholder="ABC-1234">
+
+                        <label for="tipo">Tipo de Vehículo</label>
+                        <select id="tipo">
+                            <option value="auto">Auto</option>
+                            <option value="moto">Moto</option>
+                        </select>
+
+                        <button type="submit">Registrar Entrada</button>
+                    </form>
+                    <p>Espacios disponibles: <strong>50</strong></p>
+                </section>
+            </aside>
+
+        </div>
+    </main>
+
+</body>
+</html>

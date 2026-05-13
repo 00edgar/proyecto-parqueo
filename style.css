@@ -14,3 +14,94 @@ nav{
     border-radius: 100%;
     align-self: left;
    }
+   #contenedorPrincipal{
+    color:white;
+    background-image: url(./img/contenedorPrincipal.png);
+    width: 100%;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+   }
+
+
+
+/* El cuadro blanco del formulario */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Blanco con un poco de transparencia */
+    width: 90%; /* Ocupa el 90% en móviles */
+    max-width: 400px; /* Pero no más de 400px en pantallas grandes */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2); /* Sombra para que "flote" */
+    text-align: center;
+    color: #0a0a1a;
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box; /* Para que el padding no afecte el ancho */
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0a0a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-button:hover {
+    background-color: #333;
+}
+
+.footer-links {
+    margin-top: 15px;
+}
+
+.footer-links a {
+    font-size: 12px;
+    color: #666;
+    text-decoration: none;
+}
+
+
+#contenedorServiciops{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.servicio{
+    gap: 10%;
+    width: 30%;
+    height: 600px;
+}
