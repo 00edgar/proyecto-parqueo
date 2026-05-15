@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -8,14 +8,14 @@
 </head>
 <body>
 
-    <!-- Encabezado Principal -->
+    <!-- Encabezado Principal --
     <header>
         <h1>Sistema de Gestión de Parqueo</h1>
         <p>Control y monitoreo de espacios en tiempo real</p>
     </header>
 
     <main>
-        <!-- Sección de Estadísticas (Tarjetas superiores) -->
+        <!-- Sección de Estadísticas (Tarjetas superiores) --
         <section id="stats">
             <article class="stat-card">
                 <p>Ocupación</p>
@@ -37,14 +37,14 @@
 
         <hr>
 
-        <!-- Contenedor Flexible para el Mapa y el Formulario -->
+        <!-- Contenedor Flexible para el Mapa y el Formulario --
         <div class="content-wrapper">
             
-            <!-- Mapa del Parqueo -->
+            <!-- Mapa del Parqueo --
             <section id="parking-map">
                 <h2>Mapa del Parqueo</h2>
                 <div class="grid-container">
-                    <!-- Ejemplo de un espacio (se repetiría para los 50) -->
+                    <!-- Ejemplo de un espacio (se repetiría para los 50) --
                     <div class="slot">1</div>
                     <div class="slot">2</div>
                     <div class="slot">3</div>
@@ -65,11 +65,11 @@
                     <div class="slot">18</div>
                     <div class="slot">19</div>
                     <div class="slot">20</div>
-                    <!-- ... -->
+                    <!-- ... --
                 </div>
             </section>
 
-            <!-- Formulario de Registro -->
+            <!-- Formulario de Registro --
             <aside id="registration">
                 <section class="form-card">
                     <h3>Registrar Entrada</h3>
@@ -94,5 +94,76 @@
  
     <script src="/parqueo.js"></script>
 
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Parqueo</title>
+    <link rel="stylesheet" href="parqueo.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Sistema de Gestión de Parqueo</h1>
+        <p>Control y monitoreo de espacios en tiempo real</p>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Ocupación</h3>
+            <p id="stat-occupancy">0/20</p>
+        </div>
+        <div class="stat-card">
+            <h3>Tasa de Ocupación</h3>
+            <p id="stat-rate">0%</p>
+        </div>
+        <div class="stat-card">
+            <h3>Vehículos Hoy</h3>
+            <p id="stat-total">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Tiempo Promedio</h3>
+            <p id="stat-avg-time">0 min</p>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div class="card">
+            <h2>Mapa del Parqueo</h2>
+            <div class="parking-grid" id="parking-map">
+                </div>
+        </div>
+
+        <div class="card">
+            <h2>Registrar Entrada</h2>
+            <div class="form-group">
+                <label>Placa del Vehículo</label>
+                <input type="text" id="input-placa" placeholder="ABC-1234">
+            </div>
+            <div class="form-group">
+                <label>Tipo de Vehículo</label>
+                <select id="input-tipo">
+                    <option value="Carro">Carro</option>
+                    <option value="Moto">Moto</option>
+                </select>
+            </div>
+            <button class="btn" onclick="registrarEntrada()">Registrar Entrada</button>
+            <div class="info-msg" id="msg-disponibles">Espacios disponibles: 20</div>
+            
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            <p style="font-size: 0.8rem; color: #888;">
+                <strong>Nota:</strong> Para registrar la salida y liberar un espacio, haz clic sobre el slot ocupado (color rojo) en el mapa.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="parqueo.js"></script>
 </body>
 </html>
