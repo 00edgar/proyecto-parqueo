@@ -1,137 +1,117 @@
-nav{
+/* General */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+nav {
     background-color: rgb(2, 112, 107);
     width: 100%;
-    height: auto;
-    align-items: center;
-    justify-content: center;
-    gap :10px;
-    color: white;
+    min-height: 80px;
     display: flex;
-   }
-   img{
-    width: 10%;
-    height: 10%;
-    border-radius: 100%;
-    align-self: left;
-   }
-   #contenedorPrincipal{
-    color:white;
-    /*background-image: url(./img/contenedorPrincipal.png);*/
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0;
+    flex-wrap: wrap; /* Para que en móviles el logo y botones se acomoden */
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    background: rgba(0,0,0,0.2);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+#contenedorPrincipal {
+    color: white;
     background-color: #08525f;
     width: 100%;
-    text-align: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-   }
+    align-items: center;
+    padding-bottom: 50px;
+}
 
-
-
-/* El cuadro blanco del formulario */
+/* Formulario */
 .login-container {
-    background-color: rgba(255, 255, 255, 0.9); /* Blanco con un poco de transparencia */
-    width: 90%; /* Ocupa el 90% en móviles */
-    max-width: 400px; /* Pero no más de 400px en pantallas grandes */
-    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 90%;
+    max-width: 350px;
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.2); /* Sombra para que "flote" */
-    text-align: center;
-    color: #0a0a1a;
-}
-
-h2 {
-    margin-top: 0;
-    color: #0f0f0f;
-}
-
-.input-group {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    font-weight: bold;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+    margin: 20px 0;
+    color: #333;
 }
 
 input {
     width: 100%;
     padding: 12px;
+    margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    box-sizing: border-box; /* Para que el padding no afecte el ancho */
+    box-sizing: border-box;
 }
 
-.login-button {
+.login-button, .register {
+    display: block;
     width: 100%;
     padding: 12px;
     background-color: #0a0a1a;
     color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.register {
-    width: 100%;
-    padding: 12px;
-    background-color: #0a0a1a;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-}
-.login-button:hover {
-    background-color: #333;
-}
-.register:hover {
-    background-color: #333;
-}
-
-.footer-links {
-    margin-top: 15px;
-}
-
-.footer-links a {
-    font-size: 12px;
-    color: #666;
     text-decoration: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-align: center;
+    box-sizing: border-box;
 }
 
-
-#contenedorServicio{
-    justify-content: center;
-    align-items: center;
+/* Contenedor de Servicios Responsivo */
+#contenedorServicio {
     display: flex;
+    flex-wrap: wrap; /* CLAVE PARA RESPONSIVE */
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 40px;
 }
-.servicio{
-    margin-left: 20PX;
-    gap: 10%;
-    width: 30%;
-    height: 600px;
+
+.servicio {
+    width: 80%; /* En móviles ocupa casi todo el ancho */
+    max-width: 300px; /* En escritorio no crece demasiado */
     background-color: rgba(4, 82, 85, 0.9);
     border-radius: 15px;
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;  
-}
-.parrafoServicio{
-    font-size: 14px;
-    text-align: justify;
-    font-size: 30px;
+    padding: 20px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
 }
 
+.servicio:hover {
+    transform: translateY(-5px);
+}
+
+.parrafoServicio {
+    font-size: 16px; /* Tamaño de letra legible */
+    text-align: left;
+    line-height: 1.5;
+}
+
+/* Media Query para Pantallas Grandes (Escritorio) */
+@media (min-width: 768px) {
+    .servicio {
+        width: 25%; /* Se ponen uno al lado del otro */
+    }
+    
+    #contenedorServicio {
+        flex-direction: row;
+    }
+}

@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #08525f; /* El color que usas en tu proyecto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#contenedorRegistro {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.registro-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px; /* Tamaño máximo en escritorio */
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+h1 { color: #08525f; margin-bottom: 5px; }
+p { color: #666; margin-bottom: 20px; }
+
+.campo {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Evita que el input se salga de la caja */
+}
+
+.btn-registrar {
+    width: 100%;
+    padding: 12px;
+    background-color: #02706b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.btn-registrar:hover {
+    background-color: #014d4a;
+}
+
+.footer-registro {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.footer-registro a {
+    color: #08525f;
+    text-decoration: none;
+    font-weight: bold;
+}

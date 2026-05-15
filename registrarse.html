@@ -1,11 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REGISTRARSE</title>
+    <title>Registro - Smart Parking</title>
+    <link rel="stylesheet" href="style-registro.css">
 </head>
 <body>
-    
+    <div id="contenedorRegistro">
+        <div class="registro-box">
+            <h1>Crear Cuenta</h1>
+            <p>Únete a la red de Smart-Parking</p>
+
+            <form id="formRegistro">
+                <div class="campo">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="regNombre" placeholder="Tu nombre" required>
+                </div>
+
+                <div class="campo">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="regEmail" placeholder="correo@ejemplo.com" required>
+                </div>
+
+                <div class="campo">
+                    <label>Contraseña</label>
+                    <input type="password" id="regPass" placeholder="Crea una clave" required>
+                </div>
+
+                <button type="submit" class="btn-registrar">Registrarme</button>
+                
+                <div class="footer-registro">
+                    <span>¿Ya tienes cuenta? </span>
+                    <a href="index.html">Inicia sesión aquí</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="registrarse.js"></script>
 </body>
 </html>

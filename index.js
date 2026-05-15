@@ -1,29 +1,36 @@
-const pasword = document.getElementById("password");
-const togglePassword = document.getElementById("togglePassword");
+// Esperamos a que el DOM esté cargado para evitar errores
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Seleccionamos el formulario usando su clase
+    const loginForm = document.querySelector('.login-form');
 
-togglePassword.addEventListener("click", function () {
-    const type = pasword.getAttribute("type") === "1234" ? "text" : "password";
-    pasword.setAttribute("type", type);
-    this.classList.toggle("fa-eye-slash");
-});    
-const email = document.getElementById("email");
-const toggleEmail = document.getElementById("toggleEmail");
+    // Escuchamos el evento de envío (submit)
+    loginForm.addEventListener('submit', (e) => {
+        // 1. Prevenimos que el formulario recargue la página
+        e.preventDefault();
 
-toggleEmail.addEventListener("click", function () {
-    const type = email.getAttribute("type") === "1234" ? "text" : "email";
-    email.setAttribute("type", type);
-    this.classList.toggle("fa-eye-slash");
-}); 
-function validarFormulario() {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+        // 2. Capturamos los valores de los inputs por su ID
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-    if (email === "" || password === "") {
-        alert("Por favor, complete todos los campos.");
-        return false;
-    }
+        // 3. Validación básica
+        // Aquí puedes cambiar 'admin@correo.com' y '1234' por lo que desees
+        if (email === "" || password === "") {
+            alert("Por favor, completa todos los campos.");
+            return;
+        }
+        
+        // Simulación de validación de credenciales
+        if (email === "usuario@ejemplo.com" && password === "123456") {
+            
+            alert("¡Bienvenido a Smart-Parking!");
+            
+            // 4. Redirección a la página de parqueo
+            window.location.href = "parqueo.html";
 
-    // Aquí puedes agregar más validaciones, como formato de correo electrónico o longitud de contraseña
-
-    return true; // Permite enviar el formulario si todo es válido
-}           
+        } else {
+            // Si los datos son incorrectos
+            alert("Correo o contraseña incorrectos. Intenta de nuevo.");
+        }
+    });
+});
