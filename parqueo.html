@@ -1,109 +1,9 @@
-<!--<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gestión de Parqueo - Maquetación</title>
-    <link rel="stylesheet" href="parqueo.css">
-</head>
-<body>
-
-    <!-- Encabezado Principal --
-    <header>
-        <h1>Sistema de Gestión de Parqueo</h1>
-        <p>Control y monitoreo de espacios en tiempo real</p>
-    </header>
-
-    <main>
-        <!-- Sección de Estadísticas (Tarjetas superiores) --
-        <section id="stats">
-            <article class="stat-card">
-                <p>Ocupación</p>
-                <strong>0/50</strong>
-            </article>
-            <article class="stat-card">
-                <p>Tasa de Ocupación</p>
-                <strong>0.0%</strong>
-            </article>
-            <article class="stat-card">
-                <p>Vehículos Hoy</p>
-                <strong>0</strong>
-            </article>
-            <article class="stat-card">
-                <p>Tiempo Promedio</p>
-                <strong>0h</strong>
-            </article>
-        </section>
-
-        <hr>
-
-        <!-- Contenedor Flexible para el Mapa y el Formulario --
-        <div class="content-wrapper">
-            
-            <!-- Mapa del Parqueo --
-            <section id="parking-map">
-                <h2>Mapa del Parqueo</h2>
-                <div class="grid-container">
-                    <!-- Ejemplo de un espacio (se repetiría para los 50) --
-                    <div class="slot">1</div>
-                    <div class="slot">2</div>
-                    <div class="slot">3</div>
-                    <div class="slot">4</div>
-                    <div class="slot">6</div>
-                    <div class="slot">6</div>
-                    <div class="slot">7</div>
-                    <div class="slot">8</div>
-                    <div class="slot">9</div>
-                    <div class="slot">10</div>
-                    <div class="slot">11</div>
-                    <div class="slot">12</div>
-                    <div class="slot">13</div>
-                    <div class="slot">14</div>
-                    <div class="slot">15</div>
-                    <div class="slot">16</div>
-                    <div class="slot">17</div>
-                    <div class="slot">18</div>
-                    <div class="slot">19</div>
-                    <div class="slot">20</div>
-                    <!-- ... --
-                </div>
-            </section>
-
-            <!-- Formulario de Registro --
-            <aside id="registration">
-                <section class="form-card">
-                    <h3>Registrar Entrada</h3>
-                    <form>
-                        <label for="placa">Placa del Vehículo</label>
-                        <input type="text" id="placa" placeholder="ABC-1234">
-
-                        <label for="tipo">Tipo de Vehículo</label>
-                        <select id="tipo">
-                            <option value="auto">Auto</option>
-                            <option value="moto">Moto</option>
-                        </select>
-
-                        <button type="submit">Registrar Entrada</button>
-                    </form>
-                    <p>Espacios disponibles: <strong>50</strong></p>
-                </section>
-            </aside>
-
-        </div>
-    </main>
- 
-    <script src="/parqueo.js"></script>
-
-</body>
-</html>
--->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gestión de Parqueo</title>
+    <title>Gestión de Parqueo Pro</title>
     <link rel="stylesheet" href="parqueo.css">
 </head>
 <body>
@@ -111,55 +11,60 @@
 <div class="container">
     <header>
         <h1>Sistema de Gestión de Parqueo</h1>
-        <p>Control y monitoreo de espacios en tiempo real</p>
+        <p>Control diferenciado por tipo de vehículo</p>
     </header>
 
     <div class="stats-grid">
-        <div class="stat-card">
-            <h3>Ocupación</h3>
-            <p id="stat-occupancy">0/20</p>
-        </div>
-        <div class="stat-card">
-            <h3>Tasa de Ocupación</h3>
-            <p id="stat-rate">0%</p>
-        </div>
-        <div class="stat-card">
-            <h3>Vehículos Hoy</h3>
-            <p id="stat-total">0</p>
-        </div>
-        <div class="stat-card">
-            <h3>Tiempo Promedio</h3>
-            <p id="stat-avg-time">0 min</p>
-        </div>
+        <div class="stat-card"><h3>Ocupación</h3><p id="stat-occupancy">0/20</p></div>
+        <div class="stat-card"><h3>Tasa Ocupación</h3><p id="stat-rate">0%</p></div>
+        <div class="stat-card"><h3>Vehículos Hoy</h3><p id="stat-total">0</p></div>
+        <div class="stat-card"><h3>Promedio</h3><p id="stat-avg-time">0 min</p></div>
     </div>
 
     <div class="main-layout">
-        <div class="card">
-            <h2>Mapa del Parqueo</h2>
-            <div class="parking-grid" id="parking-map">
-                </div>
+        <div class="left-column">
+            <div class="card">
+                <h2>🚗 Slots para Carros</h2>
+                <div class="parking-grid" id="grid-carros"></div>
+                
+                <h2 style="margin-top: 30px;">🏍️ Slots para Motos</h2>
+                <div class="parking-grid" id="grid-motos"></div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;" id="panel-ocupados">
+                <h2>📋 Lista de Vehículos Ocupados</h2>
+                <table class="tabla-ocupados">
+                    <thead>
+                        <tr>
+                            <th>Placa</th>
+                            <th>Tipo</th>
+                            <th>Slot</th>
+                            <th>Entrada</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-ocupados-body">
+                        </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="card">
-            <h2>Registrar Entrada</h2>
-            <div class="form-group">
-                <label>Placa del Vehículo</label>
-                <input type="text" id="input-placa" placeholder="ABC-1234">
+        <div class="right-column">
+            <div class="card">
+                <h2>Registrar Entrada</h2>
+                <div class="form-group">
+                    <label>Placa del Vehículo</label>
+                    <input type="text" id="input-placa" placeholder="ABC-1234">
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Vehículo</label>
+                    <select id="input-tipo">
+                        <option value="Carro">Carro</option>
+                        <option value="Moto">Moto</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="registrarEntrada()">Confirmar Entrada</button>
             </div>
-            <div class="form-group">
-                <label>Tipo de Vehículo</label>
-                <select id="input-tipo">
-                    <option value="Carro">Carro</option>
-                    <option value="Moto">Moto</option>
-                </select>
-            </div>
-            <button class="btn" onclick="registrarEntrada()">Registrar Entrada</button>
-            <div class="info-msg" id="msg-disponibles">Espacios disponibles: 20</div>
-            
-            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-            <p style="font-size: 0.8rem; color: #888;">
-                <strong>Nota:</strong> Para registrar la salida y liberar un espacio, haz clic sobre el slot ocupado (color rojo) en el mapa.
-            </p>
         </div>
     </div>
 </div>

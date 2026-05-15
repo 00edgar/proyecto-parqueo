@@ -1,104 +1,115 @@
-const TOTAL_SLOTS = 20;
-// Array para guardar el estado: null es libre, un objeto es ocupado
-let slots = Array(TOTAL_SLOTS).fill(null); 
-let historialHoy = [];
+const CARRO_SLOTS = 20;
+const MOTO_SLOTS = 10;
 
-// Inicializar el mapa al cargar
-function initMap() {
-    const grid = document.getElementById('parking-map');
-    grid.innerHTML = '';
+// Estructura de datos: { id, tipo, estado: null | {placa, entrada} }
+let slots = [
+    ...Array.from({length: CARRO_SLOTS}, (_, i) => ({ id: i + 1, tipo: 'Carro', datos: null })),
+    ...Array.from({length: MOTO_SLOTS}, (_, i) => ({ id: i + 1, tipo: 'Moto', datos: null }))
+];
+
+let historial = [];
+
+function init() {
+    renderGrids();
+    renderListaOcupados();
+    actualizarDashboard();
+}
+
+function renderGrids() {
+    const gridCarros = document.getElementById('grid-carros');
+    const gridMotos = document.getElementById('grid-motos');
     
+    gridCarros.innerHTML = '';
+    gridMotos.innerHTML = '';
+
     slots.forEach((slot, index) => {
         const div = document.createElement('div');
-        div.className = `slot ${slot ? 'occupied' : 'available'}`;
-        
-        // Si hay un vehículo, mostramos su placa, si no, el número de slot
-        div.innerHTML = `
-            ${index + 1}
-            <span>${slot ? slot.placa : 'LIBRE'}</span>
-        `;
-        
-        // Si está ocupado, al hacer clic liberamos el espacio
-        div.onclick = () => { 
-            if(slot) registrarSalida(index); 
-        };
-        
-        grid.appendChild(div);
+        div.className = `slot ${slot.datos ? 'occupied' : 'available'}`;
+        div.innerHTML = `Slot ${slot.id} <span>${slot.datos ? slot.datos.placa : 'LIBRE'}</span>`;
+        div.onclick = () => { if(slot.datos) registrarSalida(index); };
+
+        if(slot.tipo === 'Carro') gridCarros.appendChild(div);
+        else gridMotos.appendChild(div);
     });
-    
-    actualizarEstadisticas();
 }
 
 function registrarEntrada() {
-    const placaInput = document.getElementById('input-placa');
-    const placa = placaInput.value.toUpperCase().trim();
+    const placa = document.getElementById('input-placa').value.toUpperCase().trim();
     const tipo = document.getElementById('input-tipo').value;
 
-    if (!placa) {
-        alert('Por favor, ingrese una placa.');
-        return;
-    }
+    if(!placa) return alert("Ingrese placa");
 
-    // Buscar primer espacio libre
-    const indiceLibre = slots.indexOf(null);
-    if (indiceLibre === -1) {
-        alert('Lo sentimos, el parqueo está lleno.');
-        return;
-    }
+    // Buscar espacio por tipo
+    const index = slots.findIndex(s => s.tipo === tipo && s.datos === null);
 
-    // Guardar datos en el slot
-    slots[indiceLibre] = {
+    if(index === -1) return alert(`No hay espacios disponibles para ${tipo}s`);
+
+    slots[index].datos = {
         placa: placa,
-        tipo: tipo,
-        horaEntrada: new Date()
+        entrada: new Date()
     };
 
-    // Añadir al historial general del día
-    historialHoy.push({ placa, tipo, entrada: new Date() });
-    
-    // Limpiar input y refrescar vista
-    placaInput.value = '';
-    initMap();
+    historial.push({ placa, tipo, entrada: new Date() });
+    document.getElementById('input-placa').value = '';
+    init();
 }
 
 function registrarSalida(index) {
     const vehiculo = slots[index];
-    
-    if (confirm(`¿Desea registrar la salida del vehículo ${vehiculo.placa}?`)) {
-        const horaSalida = new Date();
-        const diferenciaMs = horaSalida - vehiculo.horaEntrada;
-        const minutosTranscurridos = Math.round(diferenciaMs / 60000);
-
-        // Actualizar el historial con la duración para el promedio
-        const registro = historialHoy.find(h => h.placa === vehiculo.placa && !h.duracion);
-        if (registro) {
-            registro.duracion = minutosTranscurridos;
+    if(confirm(`¿Salida de ${vehiculo.datos.placa}?`)) {
+        const hIndex = historial.findIndex(h => h.placa === vehiculo.datos.placa && !h.duracion);
+        if(hIndex !== -1) {
+            const duracion = Math.round((new Date() - historial[hIndex].entrada) / 60000);
+            historial[hIndex].duracion = duracion;
         }
-
-        // Liberar el slot
-        slots[index] = null;
-        initMap();
+        slots[index].datos = null;
+        init();
     }
 }
 
-function actualizarEstadisticas() {
-    const ocupados = slots.filter(s => s !== null).length;
-    const tasa = (ocupados / TOTAL_SLOTS) * 100;
+function renderListaOcupados() {
+    const container = document.getElementById('lista-ocupados-body');
+    const panel = document.getElementById('panel-ocupados');
+    container.innerHTML = '';
     
-    // Actualizar textos en el Dashboard
-    document.getElementById('stat-occupancy').innerText = `${ocupados}/${TOTAL_SLOTS}`;
-    document.getElementById('stat-rate').innerText = `${tasa.toFixed(1)}%`;
-    document.getElementById('stat-total').innerText = historialHoy.length;
-    document.getElementById('msg-disponibles').innerText = `Espacios disponibles: ${TOTAL_SLOTS - ocupados}`;
+    const ocupados = slots.filter(s => s.datos !== null);
+    
+    // Si no hay ocupados, ocultamos el panel
+    panel.style.display = ocupados.length > 0 ? 'block' : 'none';
 
-    // Calcular tiempo promedio de los que ya salieron
-    const vehiculosConSalida = historialHoy.filter(h => h.duracion !== undefined);
-    if (vehiculosConSalida.length > 0) {
-        const sumaTiempos = vehiculosConSalida.reduce((acc, v) => acc + v.duracion, 0);
-        const promedio = sumaTiempos / vehiculosConSalida.length;
-        document.getElementById('stat-avg-time').innerText = `${Math.round(promedio)} min`;
+    ocupados.forEach(slot => {
+        const row = document.createElement('tr');
+        const hora = slot.datos.entrada.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        
+        row.innerHTML = `
+            <td><strong>${slot.datos.placa}</strong></td>
+            <td>${slot.tipo}</td>
+            <td>#${slot.id}</td>
+            <td>${hora}</td>
+            <td><button class="btn-salida" onclick="gestionarSalidaDesdeLista('${slot.datos.placa}')">Salida</button></td>
+        `;
+        container.appendChild(row);
+    });
+}
+
+function gestionarSalidaDesdeLista(placa) {
+    const index = slots.findIndex(s => s.datos?.placa === placa);
+    if(index !== -1) registrarSalida(index);
+}
+
+function actualizarDashboard() {
+    const totalOcupados = slots.filter(s => s.datos !== null).length;
+    const totalSlots = CARRO_SLOTS + MOTO_SLOTS;
+    
+    document.getElementById('stat-occupancy').innerText = `${totalOcupados}/${totalSlots}`;
+    document.getElementById('stat-rate').innerText = `${((totalOcupados/totalSlots)*100).toFixed(1)}%`;
+    document.getElementById('stat-total').innerText = historial.length;
+
+    const salidos = historial.filter(h => h.duracion !== undefined);
+    if(salidos.length > 0) {
+        const prom = salidos.reduce((a, b) => a + b.duracion, 0) / salidos.length;
+        document.getElementById('stat-avg-time').innerText = `${Math.round(prom)} min`;
     }
 }
 
-// Ejecutar al iniciar
-initMap();
+init();
