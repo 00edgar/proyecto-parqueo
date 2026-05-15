@@ -1,4 +1,4 @@
-document.querySelector('.login-form').addEventListener('submit', (e) => {
+/*document.querySelector('.login-form').addEventListener('submit', (e) => {
     e.preventDefault();
 
     const emailInput = document.getElementById('email').value;
@@ -55,4 +55,38 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Correo o contraseña incorrectos. Intenta de nuevo.");
         }
     });
+});
+*/
+
+document.querySelector('.login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const emailInput = document.getElementById('email').value;
+    const passInput = document.getElementById('password').value;
+
+    const url = "TU_URL_DE_FIREBASE/usuarios.json";
+
+    try {
+        const respuesta = await fetch(url);
+        const datos = await respuesta.json(); // Esto nos trae todos los usuarios
+
+        let usuarioValido = false;
+
+        // Firebase devuelve un objeto de objetos, así que lo recorremos
+        for (let id in datos) {
+            if (datos[id].email === emailInput && datos[id].password === passInput) {
+                usuarioValido = datos[id];
+                break;
+            }
+        }
+
+        if (usuarioValido) {
+            alert("Bienvenido " + usuarioValido.nombre);
+            window.location.href = "parqueo.html";
+        } else {
+            alert("Usuario no encontrado en la base de datos.");
+        }
+    } catch (error) {
+        alert("Error al conectar con la nube");
+    }
 });
