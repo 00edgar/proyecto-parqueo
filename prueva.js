@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-*/
+
 
 document.querySelector('.login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -90,3 +90,4 @@ document.querySelector('.login-form').addEventListener('submit', async (e) => {
         alert("Error al conectar con la nube");
     }
 });
+*/
