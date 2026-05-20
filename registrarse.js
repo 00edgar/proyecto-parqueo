@@ -36,3 +36,4 @@ document.getElementById('formRegistro').addEventListener('submit', function(e) {
     // 6. Mandarlo al login para que entre
     window.location.href = "index.html";
 });
+

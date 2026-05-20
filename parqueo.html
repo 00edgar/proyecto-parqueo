@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Parqueo Pro</title>
+    <script src="parqueo.js"></script>
     <link rel="stylesheet" href="parqueo.css">
 </head>
 <body>
@@ -19,6 +20,8 @@
         <div class="stat-card"><h3>Tasa Ocupación</h3><p id="stat-rate">0%</p></div>
         <div class="stat-card"><h3>Vehículos Hoy</h3><p id="stat-total">0</p></div>
         <div class="stat-card"><h3>Promedio</h3><p id="stat-avg-time">0 min</p></div>
+        <a   class="stat-card" href="historial.html"> <h3>historial</h3></a>
+        <button class="stat-card"  id="btnPerfil" onclick="visualizarUsuario()">perfil</button>
     </div>
 
     <div class="main-layout">
@@ -70,7 +73,8 @@
         </div>
     </div>
 </div>
-
-<script src="parqueo.js"></script>
+<script>
+    init();
+</script>
 </body>
 </html>

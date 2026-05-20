@@ -1,30 +1,32 @@
 const CARRO_SLOTS = 20;
 const MOTO_SLOTS = 10;
 
-// 1. CARGAR DATOS INICIALES DESDE LOCALSTORAGE O CREARLOS POR PRIMERA VEZ
-let slots = JSON.parse(localStorage.getItem('parking_slots'));
 
-if (!slots) {
-    // Si no existen datos guardados, creamos la estructura inicial libre
-    slots = [
-        ...Array.from({length: CARRO_SLOTS}, (_, i) => ({ id: i + 1, tipo: 'Carro', datos: null })),
-        ...Array.from({length: MOTO_SLOTS}, (_, i) => ({ id: i + 1, tipo: 'Moto', datos: null }))
-    ];
-    guardarEnLocalStorage();
-} else {
-    // Si existían datos, convertimos los textos de las fechas de entrada de vuelta a objetos Date
-    slots.forEach(slot => {
-        if (slot.datos && slot.datos.entrada) {
-            slot.datos.entrada = new Date(slot.datos.entrada);
-        }
+    // 1. CARGAR DATOS INICIALES DESDE LOCALSTORAGE O CREARLOS POR PRIMERA VEZ
+    let slots = JSON.parse(localStorage.getItem('parking_slots'));
+
+    if (!slots) {
+        // Si no existen datos guardados, creamos la estructura inicial libre
+        slots = [
+            ...Array.from({length: CARRO_SLOTS}, (_, i) => ({ id: i + 1, tipo: 'Carro', datos: null })),
+            ...Array.from({length: MOTO_SLOTS}, (_, i) => ({ id: i + 1, tipo: 'Moto', datos: null }))
+        ];
+        guardarEnLocalStorage();
+    } else {
+        // Si existían datos, convertimos los textos de las fechas de entrada de vuelta a objetos Date
+        slots.forEach(slot => {
+            if (slot.datos && slot.datos.entrada) {
+                slot.datos.entrada = new Date(slot.datos.entrada);
+            }
+        });
+    }
+
+    // Cargar historial o iniciar vacío si no existe
+    let historial = JSON.parse(localStorage.getItem('parking_historial')) || [];
+    historial.forEach(h => {
+        if (h.entrada) h.entrada = new Date(h.entrada);
     });
-}
 
-// Cargar historial o iniciar vacío si no existe
-let historial = JSON.parse(localStorage.getItem('parking_historial')) || [];
-historial.forEach(h => {
-    if (h.entrada) h.entrada = new Date(h.entrada);
-});
 
 // 2. FUNCIÓN AUXILIAR PARA GUARDAR EL ESTADO ACTUAL
 function guardarEnLocalStorage() {
@@ -36,6 +38,7 @@ function init() {
     renderGrids();
     renderListaOcupados();
     actualizarDashboard();
+ 
 }
 
 function renderGrids() {
@@ -57,7 +60,7 @@ function renderGrids() {
 }
 
 function registrarEntrada() {
-    const placa = document.getElementById('input-placa').value.toUpperCase().trim();
+    const placa = document.getElementById('input-placa',).value.toUpperCase().trim();
     const tipo = document.getElementById('input-tipo').value;
 
     if(!placa) return alert("Ingrese placa");
@@ -198,20 +201,20 @@ function actualizarDashboard() {
 function cerrarSesion() {
     // 1. Preguntar al usuario para evitar cierres accidentales
     if (confirm("¿Está seguro de que desea cerrar sesión y salir?")) {
-        
-        // OPCIÓN A: Si solo quieres salir al login sin borrar el parqueo:
-        // (Los carros se quedan guardados para cuando vuelvas a entrar)
-        // No hacemos nada con el localStorage.
-
-        // OPCIÓN B: Si cerrar sesión significa reiniciar el parqueo desde cero:
-        // Descomenta las siguientes dos líneas si tu profesor te pide limpiar todo al salir:
-        // localStorage.removeItem('parking_slots');
-        // localStorage.removeItem('parking_historial');
-
-        // 2. Redireccionar al HTML principal (cambia 'index.html' por el nombre de tu archivo de login o inicio)
-        window.location.href = 'index.html';
+        window.location.href = "index.html";
     }
 }
 
-// Arrancar la aplicación
-init();
+function actualizarUsuario(nuevoNombre) {
+    if (localStorage.getItem('usuariosRegistrados')) {
+        const usuario = JSON.parse(localStorage.getItem('usuariosRegistrados'));
+        
+        usuarios.name = nuevoNombre; // Editamos el dato en memoria
+        
+        localStorage.setItem('usuarioRegistrado', JSON.stringify(usuarios)); // Reemplazamos en almacenamiento
+        alert('¡Usuario actualizado con éxito!');
+    }
+}
+
+
+y
