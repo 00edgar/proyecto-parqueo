@@ -1,0 +1,20 @@
+body{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: antiquewhite;
+}
+nav{
+    margin: 0;
+    padding: 0;
+    background-color: aqua;
+    height: 40px;
+}
+.continer{
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(236, 141, 17);
+}

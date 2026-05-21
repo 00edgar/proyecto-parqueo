@@ -215,6 +215,3 @@ function actualizarUsuario(nuevoNombre) {
         alert('¡Usuario actualizado con éxito!');
     }
 }
-
-
-y
