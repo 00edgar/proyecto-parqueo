@@ -18,3 +18,11 @@ nav{
     text-align: center;
     background-color: rgb(236, 141, 17);
 }
+
+.boton{margin-left: 10px;
+     padding: 5px 10px; 
+     cursor: pointer;
+}
+p {color: red;
+     font-weight: bold;
+    }

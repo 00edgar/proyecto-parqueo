@@ -7,21 +7,28 @@
     <link rel="stylesheet" href="buscar.css">
 </head>
 <body>
-    <nav>
-        <a href="parqueo.html">
-            <h3>regresar</h3>
-        </a>
-    </nav>
-    <div id="contenedor">
-        <div class="ingresoFecha">
-                <label> Ingrese la primera fecha a buscar</label>
-                <input type="data" name="fecha1" id="fecha1">
-        </div>
-        <div class="ingresoFecha">
-            <label>Ingrese la segunda fecha a buscar</label>
-                <input type="data" name="fecha2" id="fecha2">  
-        </div>
-        <button id="buscar" onclick="buscarFecha()">aceptar</button>
+<!-- Sección de Historial por Fechas -->
+<div id="seccion-historial" style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+    <h3>Consultar Historial de Parqueo</h3>
+    
+    <div class="filtros-fecha" style="margin-bottom: 15px;">
+        <label for="fecha-inicio">Desde:</label>
+        <input type="date" id="fecha-inicio">
+        
+        <label for="fecha-fin" style="margin-left: 10px;">Hasta:</label>
+        <input type="date" id="fecha-fin">
+        
+        <button onclick="buscarHistorialPorFechas()" class="boton">Buscar</button>
     </div>
+    <a href="parqueo.html">
+        <h3>regresar</h3>
+    </a>
+
+    <!-- Espacio donde se mostrarán los datos filtrados -->
+    <div id="resultados-historial">
+        <p style="color: gray;">Selecciona un rango de fechas para ver los registros.</p>
+    </div>
+</div>
+<script src="buscar.js"></script>
 </body>
 </html>
